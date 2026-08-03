@@ -25,8 +25,8 @@ S3, etc.) — upload the folder as-is.
 
 Before going live:
 
-1. Replace `ca-pub-XXXXXXXXXXXXXXX` in `index.html` with your real AdSense
-   publisher ID (already set correctly in `ads.txt`).
+1. ✅ Real AdSense publisher ID (`ca-pub-4830421367394194`) is already wired in
+   `index.html` and `ads.txt`.
 2. Add your AdSense `<ins>` snippet inside the `.ad-slot` placeholders in
    `index.html`.
 3. Update the `buymeacoffee.com` link in `index.html` if you want the
