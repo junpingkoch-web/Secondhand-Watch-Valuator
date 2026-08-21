@@ -943,22 +943,54 @@
   </div>
 
   <section class="explain-section">
-    <h2 id="txt-explainTitle">How is this valuation estimate actually calculated?</h2>
-    <p id="txt-explainP1"></p>
-    <p id="txt-explainP2"></p>
-    <p id="txt-explainP3"></p>
+    <h2 id="txt-explainTitle">这个估值模型是怎么算出来的？</h2>
+    <p id="txt-explainP1">本工具不接入任何实时交易数据或拍卖行情，而是基于品牌历史保值规律搭建的启发式打分模型：先按知名度、稀缺性和二级市场需求，把品牌粗略分成 A / B / C 三档保值等级，再用「基准参考价 × 年限系数 × 成色系数 × 附件完整度系数」算出结果，最后再做 ±10% 的浮动作为估值范围。</p>
+    <p id="txt-explainP2">年限系数按档位分别设定——A 档品牌（如劳力士、百达翡丽）时间对价值的侵蚀很小，部分型号甚至能维持或超过原价；C 档入门品牌则随时间折旧更快。成色和原盒原证的影响是独立叠加的：品相越好、配件越齐全，保值比例越高。</p>
+    <p id="txt-explainP3">这个模型没有考虑的因素包括：限量版、停产型号的稀缺溢价、特定配色/表盘的收藏热度、当下的市场供需波动，以及具体某一块表的实际磨损状况。如果你手上的表是热门限量款，或者你正准备实际出售/以旧换新，建议再找专业鉴定机构或多家二手表商拿到实际报价，本工具只作为谈判前的粗略参考起点。</p>
 
-    <h2 id="txt-exampleTitle">Same watch, different condition — how the valuation shifts</h2>
+    <h2 id="txt-exampleTitle">同一块表，成色和配件如何影响估值</h2>
     <div class="example-table-wrap">
       <table class="example-table">
-        <thead><tr id="exampleTableHead"></tr></thead>
-        <tbody id="exampleTableBody"></tbody>
+        <thead><tr id="exampleTableHead">
+          <th>年限</th><th>成色</th><th>配件完整度</th><th>保值率</th><th>估值（美元）</th>
+        </tr></thead>
+        <tbody id="exampleTableBody">
+          <tr><td>不到 1 年</td><td>几乎全新</td><td>原盒原证齐全</td><td>100%</td><td>$10,050</td></tr>
+          <tr><td>3–5 年</td><td>优秀</td><td>原盒原证齐全</td><td>88%</td><td>$8,879</td></tr>
+          <tr><td>5–10 年</td><td>良好</td><td>仅有证书</td><td>73%</td><td>$7,291</td></tr>
+          <tr><td>10 年以上</td><td>一般</td><td>无盒无证</td><td>53%</td><td>$5,347</td></tr>
+        </tbody>
       </table>
     </div>
-    <p id="txt-exampleNote"></p>
+    <p id="txt-exampleNote">以劳力士 Submariner（基准参考价 $10,050）为例——同一款表，仅因为持有年限、成色和配件完整度不同，估值就能从接近原价一路降到打对折以上。这也是为什么工具建议你如实填写每一项，而不是只看品牌和型号就下结论。</p>
 
-    <h2 id="txt-faqTitle">Frequently Asked Questions</h2>
-    <div class="faq-list" id="faqList"></div>
+    <h2 id="txt-faqTitle">常见问题</h2>
+    <div class="faq-list" id="faqList">
+      <details class="faq-item">
+        <summary><span class="chev">▶</span> <span>这个估值是真实的市场成交价吗？</span></summary>
+        <div class="faq-a">不是。这是一个基于品牌历史保值规律的启发式打分模型，不接入任何实时拍卖行情或交易数据库，只能作为粗略参考，不代表某块具体手表当下真实能卖到的价格。</div>
+      </details>
+      <details class="faq-item">
+        <summary><span class="chev">▶</span> <span>为什么品牌要分成 A / B / C 三个保值档位？</span></summary>
+        <div class="faq-a">不同品牌在二手市场的知名度、稀缺性和需求差异很大，历史上呈现出不同的保值曲线，用统一的折旧比例去估算所有品牌并不合理，所以按档位分别设定年限系数。</div>
+      </details>
+      <details class="faq-item">
+        <summary><span class="chev">▶</span> <span>限量版或已停产的型号是不是应该更值钱？</span></summary>
+        <div class="faq-a">确实如此，但本工具的基准参考价是按常规在售型号设定的，并没有为限量版、停产热门款、特殊表盘配色等设置额外的稀缺溢价。如果你的表属于这类情况，估算结果大概率会偏低，建议咨询专业鉴定机构。</div>
+      </details>
+      <details class="faq-item">
+        <summary><span class="chev">▶</span> <span>原盒原证真的会明显影响价值吗？</span></summary>
+        <div class="faq-a">会。买家通常更信任配件齐全的表，因为原盒原证能佐证购买渠道和保修记录、也方便转售，所以「附件完整度」这一项会对最终估值产生独立的调整。</div>
+      </details>
+      <details class="faq-item">
+        <summary><span class="chev">▶</span> <span>如果我准备实际卖表，可以直接拿这个数字去谈价吗？</span></summary>
+        <div class="faq-a">可以作为谈判前的心理参考起点，但不建议直接当作报价。建议找多家二手表商或专业平台实际询价比较，真实成交价还会受当下市场供需、当地行情和买家类型影响。</div>
+      </details>
+      <details class="faq-item">
+        <summary><span class="chev">▶</span> <span>这个工具会保存我填写的手表信息吗？</span></summary>
+        <div class="faq-a">不会。所有计算都在你的浏览器本地完成，不会发送到任何服务器，也不需要注册或登录。</div>
+      </details>
+    </div>
   </section>
 
   <div class="ad-slot ad-slot--banner ad-slot--bottom">
