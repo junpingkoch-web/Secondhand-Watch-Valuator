@@ -1523,9 +1523,15 @@
     btn.addEventListener("click", function () { setLang(btn.dataset.lang); });
   });
 
-  brandSel.addEventListener("change", function () { populateModel(); calc(); });
+  var resultEventFired = false;
+  function trackResultEvent() {
+    if (resultEventFired) return;
+    resultEventFired = true;
+    if (typeof gtag === "function") gtag("event", "tool_result_generated", { tool_name: "secondhand-watch-valuator" });
+  }
+  brandSel.addEventListener("change", function () { populateModel(); calc(); trackResultEvent(); });
   [modelSel, materialSel, ageSel, condSel, papersSel, currencySel].forEach(function (sel) {
-    sel.addEventListener("change", calc);
+    sel.addEventListener("change", function () { calc(); trackResultEvent(); });
   });
 
   var initialLang = "en";
