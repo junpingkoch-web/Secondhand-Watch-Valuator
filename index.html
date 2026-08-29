@@ -112,6 +112,7 @@
     --ink-faint: #8b93a0;
     --accent-gold: #9c6f2c;
     --accent-gold-soft: #e9dcc0;
+    --accent-gold-text: #8c6428;
     --accent-blue: #2f5f8a;
     --accent-blue-soft: #dfe9f1;
     --line: #d7dbdd;
@@ -148,6 +149,7 @@
       --ink-faint: #6d7580;
       --accent-gold: #d1a75a;
       --accent-gold-soft: #3a3120;
+      --accent-gold-text: #d1a75a;
       --accent-blue: #7db0dd;
       --accent-blue-soft: #1f2c37;
       --line: #2a2f38;
@@ -184,6 +186,7 @@
     --ink-faint: #6d7580;
     --accent-gold: #d1a75a;
     --accent-gold-soft: #3a3120;
+    --accent-gold-text: #d1a75a;
     --accent-blue: #7db0dd;
     --accent-blue-soft: #1f2c37;
     --line: #2a2f38;
@@ -219,6 +222,7 @@
     --ink-faint: #8b93a0;
     --accent-gold: #9c6f2c;
     --accent-gold-soft: #e9dcc0;
+    --accent-gold-text: #8c6428;
     --accent-blue: #2f5f8a;
     --accent-blue-soft: #dfe9f1;
     --line: #d7dbdd;
@@ -311,7 +315,12 @@
     font-size: 0.7rem;
     letter-spacing: 0.13em;
     text-transform: uppercase;
-    color: var(--accent-gold);
+    /* var(--accent-gold) measures ~3.9:1 against --bg in light mode at this
+       size/weight (fails AA's 4.5:1 for normal text) -- --accent-gold-text is a
+       dedicated, theme-aware token just for this kind of text usage, so the
+       decorative gauge ring/icon strokes elsewhere that still use
+       --accent-gold directly aren't affected. */
+    color: var(--accent-gold-text);
     font-weight: 600;
     margin: 0 0 4px;
   }
@@ -341,7 +350,10 @@
     font-size: 0.74rem;
     font-weight: 700;
     letter-spacing: 0.02em;
-    padding: 6px 13px;
+    padding: 12px 16px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
     border-radius: 999px;
     cursor: pointer;
     font-family: inherit;
@@ -368,19 +380,21 @@
     gap: 2px;
   }
 
-  .top-note--meta {
-    opacity: 0.75;
-    font-size: 0.7rem;
-  }
-
   .top-note {
     font-size: 0.76rem;
-    color: var(--ink-faint);
+    color: var(--ink-muted);
     text-align: right;
     line-height: 1.45;
     margin: 0;
     flex: 1 1 auto;
     min-width: 0;
+  }
+
+  /* Same specificity as .top-note (both single-class), so source order decides
+     the winner when an element carries both classes -- must come AFTER
+     .top-note or its smaller font-size gets silently overridden. */
+  .top-note--meta {
+    font-size: 0.7rem;
   }
 
   .card {
@@ -423,7 +437,7 @@
 
   .panel .sub {
     font-size: 0.78rem;
-    color: var(--ink-faint);
+    color: var(--ink-muted);
     margin: 0 0 20px;
   }
 
@@ -481,6 +495,8 @@
   select {
     width: 100%;
     padding: 9px 11px;
+    min-height: 44px;
+    box-sizing: border-box;
     border-radius: 8px;
     border: 1px solid var(--line-strong);
     background: var(--surface-2);
@@ -541,7 +557,7 @@
   }
   .gauge-label span {
     font-size: 0.6rem;
-    color: var(--ink-faint);
+    color: var(--ink-muted);
     letter-spacing: 0.03em;
   }
 
@@ -558,6 +574,16 @@
     color: var(--good);
     font-weight: 600;
     word-break: break-word;
+  }
+
+  /* This value is a price *range* ("165,000-181,500 USD"), longer than a single
+     number -- sharing a row with the 92px gauge leaves too little width on a
+     narrow phone and word-break:break-word above would still fracture it
+     mid-digit-group. Stack vertically instead so the value gets the panel's
+     full width, and drop the font-size a bit as extra margin. */
+  @media (max-width: 480px) {
+    .result-hero { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .result-hero-text .value { font-size: 1.1rem; }
   }
 
   .line-item {
@@ -634,7 +660,7 @@
   footer {
     margin-top: 22px;
     font-size: 0.72rem;
-    color: var(--ink-faint);
+    color: var(--ink-muted);
     line-height: 1.6;
     text-align: center;
   }
@@ -732,7 +758,7 @@
     white-space: nowrap;
   }
   table.example-table thead th {
-    color: var(--ink-faint); font-weight: 600; font-size: 0.72rem;
+    color: var(--ink-muted); font-weight: 600; font-size: 0.72rem;
     text-transform: uppercase; letter-spacing: 0.04em;
   }
   table.example-table td:last-child, table.example-table th:last-child {
@@ -783,8 +809,11 @@
     font-size: 0.76rem;
   }
   .footer-links a {
-    color: var(--ink-faint);
+    color: var(--ink-muted);
     text-decoration: none;
+    padding: 13px 6px;
+    display: inline-block;
+    white-space: nowrap;
   }
   .footer-links a:hover { color: var(--ink); text-decoration: underline; }
 
@@ -817,9 +846,9 @@
         <p class="top-note top-note--meta"><span id="txt-lastUpdatedLabel">Base prices last checked</span> <span id="lastUpdatedValue"></span></p>
       </div>
       <div class="lang-switch" role="group" aria-label="Language / 语言 / Sprache">
-        <button type="button" data-lang="zh">中文</button>
-        <button type="button" data-lang="en">EN</button>
-        <button type="button" data-lang="de">DE</button>
+        <button type="button" data-lang="zh" aria-pressed="false">中文</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+        <button type="button" data-lang="de" aria-pressed="false">DE</button>
       </div>
     </div>
   </header>
@@ -1503,7 +1532,9 @@
     var t = I18N[lang];
 
     document.querySelectorAll(".lang-switch button").forEach(function (btn) {
-      btn.classList.toggle("active", btn.dataset.lang === lang);
+      var isActive = btn.dataset.lang === lang;
+      btn.classList.toggle("active", isActive);
+      btn.setAttribute("aria-pressed", isActive ? "true" : "false");
     });
 
     populateBrand(prevBrand);
